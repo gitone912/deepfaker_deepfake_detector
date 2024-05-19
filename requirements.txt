@@ -1,0 +1,5 @@
+shutil
+opencv-python
+numpy
+tensorflow
+django
