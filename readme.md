@@ -2,6 +2,9 @@
 
 This web application allows users to upload a video, which is then analyzed to detect whether it contains deepfake content. The app processes the video, extracts frames, and uses a pre-trained deep learning model to evaluate each frame's authenticity.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/W8vzLt1McN0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 ## Features
 
 - Video upload via a web interface
