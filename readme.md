@@ -1,104 +1,119 @@
-# Deepfake Detection Web Application
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake Detection Web Application</title>
+</head>
+<body>
 
-This web application allows users to upload a video, which is then analyzed to detect whether it contains deepfake content. The app processes the video, extracts frames, and uses a pre-trained deep learning model to evaluate each frame's authenticity.
+<h1>Deepfake Detection Web Application</h1>
+
+<p>This web application allows users to upload a video, which is then analyzed to detect whether it contains deepfake content. The app processes the video, extracts frames, and uses a pre-trained deep learning model to evaluate each frame's authenticity.</p>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/W8vzLt1McN0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+<h2>Features</h2>
+<ul>
+    <li>Video upload via a web interface</li>
+    <li>Frame extraction from the uploaded video</li>
+    <li>Deepfake detection on extracted frames</li>
+    <li>Results displayed with confidence scores</li>
+</ul>
 
-## Features
+<h2>Requirements</h2>
+<p>To run this application, you'll need the following libraries installed:</p>
 
-- Video upload via a web interface
-- Frame extraction from the uploaded video
-- Deepfake detection on extracted frames
-- Results displayed with confidence scores
-
-## Requirements
-
-To run this application, you'll need the following libraries installed:
-
-```
-opencv-python-headless
+<pre><code>opencv-python-headless
 numpy
 tensorflow
 django
-```
+</code></pre>
 
-## Installation
+<h2>Installation</h2>
 
-1. **Clone the repository:**
+<ol>
+    <li><strong>Clone the repository:</strong>
 
-   ```bash
-   git clone https://github.com/gitone912/deepfaker_deepfake_detector.git
-   cd deepfaker_deepfake_detector
-   ```
-2. **Create a virtual environment (optional but recommended):**
+    <pre><code>git clone https://github.com/gitone912/deepfaker_deepfake_detector.git
+cd deepfaker_deepfake_detector
+    </code></pre></li>
 
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # On Windows: venv\Scripts\activate
-   ```
-3. **Install the required libraries:**
+    <li><strong>Create a virtual environment (optional but recommended):</strong>
 
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. **Set up Django:**
+    <pre><code>python -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
+    </code></pre></li>
 
-   - Apply migrations:
+    <li><strong>Install the required libraries:</strong>
 
-     ```bash
-     python manage.py migrate
-     ```
-   - Create a superuser for the admin interface:
+    <pre><code>pip install -r requirements.txt
+    </code></pre></li>
 
-     ```bash
-     python manage.py createsuperuser
-     ```
+    <li><strong>Set up Django:</strong>
+    <ul>
+        <li>Apply migrations:</li>
+        <pre><code>python manage.py migrate
+        </code></pre>
+        <li>Create a superuser for the admin interface:</li>
+        <pre><code>python manage.py createsuperuser
+        </code></pre>
+    </ul>
+    </li>
+</ol>
 
-## Usage
+<h2>Usage</h2>
 
-1. **Run the Django development server:**
+<ol>
+    <li><strong>Run the Django development server:</strong>
+    <pre><code>python manage.py runserver
+    </code></pre></li>
 
-   ```bash
-   python manage.py runserver
-   ```
-2. **Open your web browser and navigate to:**
+    <li><strong>Open your web browser and navigate to:</strong>
+    <pre><code>http://127.0.0.1:8000/
+    </code></pre></li>
 
-   ```
-   http://127.0.0.1:8000/
-   ```
-3. **Upload a video:**
+    <li><strong>Upload a video:</strong>
+    <ul>
+        <li>Click on upload video to upload a video file.</li>
+        <li>The server will process the video, extract frames, and evaluate them using the deepfake detection model.</li>
+    </ul></li>
 
-   - Click on upload video to upload a video file.
-   - The server will process the video, extract frames, and evaluate them using the deepfake detection model.
-4. **View the results:**
+    <li><strong>View the results:</strong>
+    <ul>
+        <li>The results page will display each frame's evaluation, including the confidence score and the overall prediction for the video.</li>
+    </ul></li>
+</ol>
 
-   - The results page will display each frame's evaluation, including the confidence score and the overall prediction for the video.
+<h2>Project Structure</h2>
 
-## Project Structure
+<ul>
+    <li><strong>models/deepfake_detection_model.h5</strong>: The pre-trained deepfake detection model.</li>
+    <li><strong>media/</strong>: Directory for storing uploaded videos and extracted frames.</li>
+    <li><strong>app_name/</strong>: Replace <code>app_name</code> with your actual Django app name containing:
+        <ul>
+            <li><code>views.py</code>: Contains the logic for video upload, frame extraction, and evaluation.</li>
+            <li><code>forms.py</code>: Contains the form for video upload.</li>
+            <li><code>templates/</code>: Directory for HTML templates.</li>
+        </ul>
+    </li>
+</ul>
 
-- **models/deepfake_detection_model.h5**: The pre-trained deepfake detection model.
-- **media/**: Directory for storing uploaded videos and extracted frames.
-- **app_name/**: Replace `app_name` with your actual Django app name containing:
-  - `views.py`: Contains the logic for video upload, frame extraction, and evaluation.
-  - `forms.py`: Contains the form for video upload.
-  - `templates/`: Directory for HTML templates.
+<h2>Code Overview</h2>
+<ul>
+    <li><strong>FrameCapture(path)</strong>: Extracts frames from the video located at <code>path</code>.</li>
+    <li><strong>evaluate_frames(directory)</strong>: Evaluates extracted frames for deepfake content.</li>
+    <li><strong>upload_video(request)</strong>: Handles video upload and initiates the frame extraction and evaluation process.</li>
+</ul>
 
-## Code Overview
+<h2>Notes</h2>
+<p>Ensure the pre-trained model <code>deepfake_detection_model.h5</code> is placed in the <code>models</code> directory. The app is configured to delete and recreate the <code>media</code> directory with each new video upload to ensure a clean processing environment.</p>
 
-- **FrameCapture(path)**: Extracts frames from the video located at `path`.
-- **evaluate_frames(directory)**: Evaluates extracted frames for deepfake content.
-- **upload_video(request)**: Handles video upload and initiates the frame extraction and evaluation process.
+<h2>License</h2>
+<p>This project is licensed under the MIT License.</p>
 
-## Notes
+<h2>Contact</h2>
+<p>For any questions or feedback, please contact Akash Verma on Instagram @frozen_blink.</p>
 
-- Ensure the pre-trained model `deepfake_detection_model.h5` is placed in the `models` directory.
-- The app is configured to delete and recreate the `media` directory with each new video upload to ensure a clean processing environment.
-
-## License
-
-This project is licensed under the MIT License.
-
-## Contact
-
-For any questions or feedback, please contact  akash verma  on my insta @frozen_blink.
+</body>
+</html>
